@@ -13,38 +13,11 @@
 # limitations under the License.
 
 LOCAL_PATH:= $(call my-dir)
+
 include $(CLEAR_VARS)
-
 LOCAL_SRC_FILES := procmem.c
-
-LOCAL_C_INCLUDES := $(call include-path-for, libpagemap)
-
 LOCAL_SHARED_LIBRARIES := libpagemap
-
 LOCAL_MODULE := procmem
-
 LOCAL_MODULE_PATH := $(TARGET_OUT_OPTIONAL_EXECUTABLES)
-
 LOCAL_MODULE_TAGS := debug
-
-include $(BUILD_EXECUTABLE)
-
-
-include $(CLEAR_VARS)
-
-LOCAL_SRC_FILES := procmem.c
-
-LOCAL_C_INCLUDES := $(call include-path-for, libpagemap)
-
-#LOCAL_SHARED_LIBRARIES := libpagemap
-LOCAL_STATIC_LIBRARIES := libc \
-						 libpagemap
-						 
-LOCAL_MODULE := procmem
-
-LOCAL_MODULE_PATH := $(TARGET_OUT_OPTIONAL_EXECUTABLES)
-
-LOCAL_MODULE_TAGS := debug
-LOCAL_FORCE_STATIC_EXECUTABLE := true
-
 include $(BUILD_EXECUTABLE)

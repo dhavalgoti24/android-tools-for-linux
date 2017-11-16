@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 2.8)
-PROJECT (mem_proc)
+project (android-tools C CXX)
 file(GLOB SOURCES "${PROJECT_SOURCE_DIR}/libpagemap/*.c")
+#file(GLOB SOURCES "${PROJECT_SOURCE_DIR}/libpagemap/*.cpp")
 add_definitions (
     -D_LARGEFILE64_SOURCE
     )
@@ -10,4 +11,7 @@ add_library(pagemap ${SOURCES})
 add_executable(procmem  ${PROJECT_SOURCE_DIR}/procmem/procmem.c)
 target_link_libraries(procmem pagemap)
 add_executable(procrank  ${PROJECT_SOURCE_DIR}/procrank/procrank.c)
+add_definitions (
+    -D_GNU_SOURCE
+    )
 target_link_libraries(procrank pagemap)

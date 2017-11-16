@@ -13,22 +13,12 @@
 # limitations under the License.
 
 LOCAL_PATH:= $(call my-dir)
+
 include $(CLEAR_VARS)
-
 LOCAL_SRC_FILES := procrank.c
-
-LOCAL_C_INCLUDES := $(call include-path-for, libpagemap)
-
 LOCAL_CFLAGS := -Wall -Wextra -Wformat=2 -Werror
-
-#LOCAL_SHARED_LIBRARIES := libpagemap
-LOCAL_STATIC_LIBRARIES := libc \
-						libpagemap
-
+LOCAL_SHARED_LIBRARIES := libpagemap
 LOCAL_MODULE := procrank
-
 LOCAL_MODULE_PATH := $(TARGET_OUT_OPTIONAL_EXECUTABLES)
-
 LOCAL_MODULE_TAGS := debug
-LOCAL_FORCE_STATIC_EXECUTABLE := true
 include $(BUILD_EXECUTABLE)
