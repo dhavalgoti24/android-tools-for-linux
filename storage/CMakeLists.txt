@@ -37,3 +37,6 @@ add_library(nl ${SOURCES})
 file(GLOB IOTOP_SOURCES "${PROJECT_SOURCE_DIR}/iotop/*.cpp")
 add_executable(iotop ${IOTOP_SOURCES})
 target_link_libraries(iotop nl)
+
+add_executable(taskstats ${PROJECT_SOURCE_DIR}/taskstats/taskstats.c)
+target_link_libraries(taskstats nl)
