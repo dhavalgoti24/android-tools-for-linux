@@ -19,8 +19,7 @@
 
 #include <algorithm>
 #include <memory>
-
-#include <android-base/logging.h>
+#include <iostream>	
 
 #include "taskstats.h"
 
@@ -32,17 +31,17 @@ bool TaskstatsSocket::Open() {
   std::unique_ptr<nl_sock, decltype(&nl_socket_free)> nl(
       nl_socket_alloc(), nl_socket_free);
   if (!nl.get()) {
-    LOG(FATAL) << "Failed to allocate netlink socket";
+    std::cout << "Failed to allocate netlink socket";
   }
 
   int ret = genl_connect(nl.get());
   if (ret < 0) {
-    LOG(FATAL) << nl_geterror(ret) << std::endl << "Unable to open netlink socket (are you root?)";
+    std::cout << nl_geterror(ret) << std::endl << "Unable to open netlink socket (are you root?)";
   }
 
   int family_id = genl_ctrl_resolve(nl.get(), TASKSTATS_GENL_NAME);
   if (family_id < 0) {
-    LOG(FATAL) << nl_geterror(family_id) << std::endl << "Unable to determine taskstats family id (does your kernel support taskstats?)";
+    std::cout << nl_geterror(family_id) << std::endl << "Unable to determine taskstats family id (does your kernel support taskstats?)";
   }
 
   nl_ = std::move(nl);
@@ -77,7 +76,7 @@ static pid_t ParseAggregateTaskStats(nlattr* attr, int attr_size,
       return received_pid;
     }
     default:
-      LOG(ERROR) << "unexpected attribute inside AGGR";
+      std::cout << "unexpected attribute inside AGGR";
       return -1;
     }
   }
@@ -102,11 +101,11 @@ static int ParseTaskStats(nl_msg* msg, void* arg) {
 
       ret = ParseAggregateTaskStats(nested_attr, nla_len(attr), &stats);
       if (ret < 0) {
-        LOG(ERROR) << "Bad AGGR_PID contents";
+        std::cout << "Bad AGGR_PID contents";
       } else if (ret == taskstats_request->requested_pid) {
         taskstats_request->stats = stats;
       } else {
-        LOG(WARNING) << "got taskstats for unexpected pid " << ret <<
+        std::cout << "got taskstats for unexpected pid " << ret <<
             " (expected " << taskstats_request->requested_pid << ", continuing...";
       }
       break;
@@ -114,7 +113,7 @@ static int ParseTaskStats(nl_msg* msg, void* arg) {
     case TASKSTATS_TYPE_NULL:
       break;
     default:
-      LOG(ERROR) << "unexpected attribute in taskstats";
+      std::cout << "unexpected attribute in taskstats";
     }
   }
   return NL_OK;

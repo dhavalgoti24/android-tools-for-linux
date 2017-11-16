@@ -11,6 +11,7 @@ set(SOURCES
  ${PROJECT_SOURCE_DIR}/libnl/lib/fib_lookup/request.c
  ${PROJECT_SOURCE_DIR}/libnl/lib/msg.c
  ${PROJECT_SOURCE_DIR}/libnl/lib/object.c
+ ${PROJECT_SOURCE_DIR}/libnl/lib/socket.c
  ${PROJECT_SOURCE_DIR}/libnl/lib/attr.c
  ${PROJECT_SOURCE_DIR}/libnl/lib/utils.c
  ${PROJECT_SOURCE_DIR}/libnl/lib/cache_mngt.c
@@ -29,5 +30,10 @@ add_definitions (
     -D_GNU_SOURCE
 )
 
+add_definitions( -std=c++14 )
 include_directories (${PROJECT_SOURCE_DIR}/libnl/include)
 add_library(nl ${SOURCES})
+
+file(GLOB IOTOP_SOURCES "${PROJECT_SOURCE_DIR}/iotop/*.cpp")
+add_executable(iotop ${IOTOP_SOURCES})
+target_link_libraries(iotop nl)

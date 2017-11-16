@@ -22,8 +22,7 @@
 #include <memory>
 #include <string>
 #include <vector>
-
-#include <android-base/stringprintf.h>
+#include <cstdarg>
 
 #include "tasklist.h"
 
@@ -57,7 +56,9 @@ bool TaskList::Scan(std::map<pid_t, std::vector<pid_t>>& tgid_map) {
 }
 
 bool TaskList::ScanPid(pid_t tgid, std::vector<pid_t>& pid_list) {
-  std::string filename = android::base::StringPrintf("/proc/%d/task", tgid);
+  char pid_char[50];
+  sprintf(pid_char, "/proc/%d/task", tgid);
+  std::string filename(pid_char); 
 
   return ScanPidsInDir(filename, [&pid_list](pid_t pid) {
     pid_list.push_back(pid);

@@ -16,13 +16,13 @@
 #include <inttypes.h>
 #include <stdint.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 #include <algorithm>
 #include <map>
 #include <unordered_map>
 #include <vector>
-
-#include <android-base/logging.h>
+#include <iostream>
 
 #include "tasklist.h"
 #include "taskstats.h"
@@ -105,8 +105,6 @@ int main(int argc, char* argv[]) {
   int limit = -1;
   Sorter sorter = GetSorter("total");
 
-  android::base::InitLogging(argv, android::base::StderrLogger);
-
   while (1) {
     int c;
     static const option longopts[] = {
@@ -142,7 +140,7 @@ int main(int argc, char* argv[]) {
     case 's': {
       sorter = GetSorter(optarg);
       if (sorter == nullptr) {
-        LOG(ERROR) << "Invalid sort column \"" << optarg << "\"";
+        std::cout << "Invalid sort column \"" << optarg << "\"";
         usage(argv[0]);
         return(EXIT_FAILURE);
       }
@@ -174,7 +172,7 @@ int main(int argc, char* argv[]) {
   while (true) {
     stats.clear();
     if (!TaskList::Scan(tgid_map)) {
-      LOG(FATAL) << "failed to scan tasks";
+      std::cout << "failed to scan tasks";
     }
     for (auto& tgid_it : tgid_map) {
       pid_t tgid = tgid_it.first;
