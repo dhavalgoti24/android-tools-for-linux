@@ -32,6 +32,7 @@
 #include <stdlib.h>
 #include <sys/cdefs.h>
 #include <time.h>
+#include <math.h>
 #include <unistd.h>
 
 #include <linux/taskstats.h>
@@ -42,8 +43,8 @@ struct TaskStatistics {
     struct taskstats stats;
 };
 
-int print_receive_error(struct sockaddr_nl* address __unused,
-                        struct nlmsgerr* error, void* arg __unused) {
+int print_receive_error(struct sockaddr_nl* address,
+                        struct nlmsgerr* error, void* arg) {
     fprintf(stderr, "Netlink receive error: %s\n", strerror(-error->error));
     return NL_STOP;
 }

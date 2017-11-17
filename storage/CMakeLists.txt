@@ -39,4 +39,4 @@ add_executable(iotop ${IOTOP_SOURCES})
 target_link_libraries(iotop nl)
 
 add_executable(taskstats ${PROJECT_SOURCE_DIR}/taskstats/taskstats.c)
-target_link_libraries(taskstats nl)
+target_link_libraries(taskstats nl m)
