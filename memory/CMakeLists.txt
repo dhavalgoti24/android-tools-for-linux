@@ -1,13 +1,16 @@
 cmake_minimum_required(VERSION 2.8)
 project (android-tools C CXX)
-file(GLOB SOURCES "${PROJECT_SOURCE_DIR}/libpagemap/*.c")
-#file(GLOB SOURCES "${PROJECT_SOURCE_DIR}/libpagemap/*.cpp")
 add_definitions (
     -D_LARGEFILE64_SOURCE
     -D_GNU_SOURCE
+    -Os
     )
 include_directories (${PROJECT_SOURCE_DIR}/libpagemap/include)
-add_library(pagemap ${SOURCES})
+file(GLOB SOURCES "${PROJECT_SOURCE_DIR}/libpagemap/*.c")
+add_library(pagemap STATIC ${SOURCES})
+
+#static link
+#set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static")
 
 add_executable(procmem  ${PROJECT_SOURCE_DIR}/procmem/procmem.c)
 target_link_libraries(procmem pagemap)
