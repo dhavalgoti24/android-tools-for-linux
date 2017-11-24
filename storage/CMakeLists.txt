@@ -30,6 +30,9 @@ add_definitions (
     -D_GNU_SOURCE
 )
 
+#static link
+#set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -static")
+
 add_definitions( -std=c++14 )
 include_directories (${PROJECT_SOURCE_DIR}/libnl/include)
 add_library(nl ${SOURCES})
