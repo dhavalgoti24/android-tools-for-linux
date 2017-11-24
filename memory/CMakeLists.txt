@@ -4,7 +4,8 @@ add_definitions (
     -D_LARGEFILE64_SOURCE
     -D_GNU_SOURCE
     -Os
-    )
+    -std=c++11
+)
 include_directories (${PROJECT_SOURCE_DIR}/libpagemap/include)
 file(GLOB SOURCES "${PROJECT_SOURCE_DIR}/libpagemap/*.c")
 add_library(pagemap STATIC ${SOURCES})
@@ -21,3 +22,5 @@ add_executable(showmap  ${PROJECT_SOURCE_DIR}/showmap/showmap.cpp)
 target_link_libraries(showmap)
 add_executable(showslab  ${PROJECT_SOURCE_DIR}/showslab/showslab.c)
 target_link_libraries(showslab)
+add_executable(zram-perf  ${PROJECT_SOURCE_DIR}/zram-perf/zram-perf.cpp)
+target_link_libraries(zram-perf)
