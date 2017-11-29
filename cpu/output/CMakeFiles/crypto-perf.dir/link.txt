@@ -1,1 +1,0 @@
-/usr/bin/c++      CMakeFiles/crypto-perf.dir/crypto-perf/crypto.cpp.o  -o crypto-perf -rdynamic 
