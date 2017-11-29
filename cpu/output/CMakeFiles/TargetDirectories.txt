@@ -1,0 +1,3 @@
+/data/repo/android-tools-for-linux/cpu/output/CMakeFiles/edit_cache.dir
+/data/repo/android-tools-for-linux/cpu/output/CMakeFiles/rebuild_cache.dir
+/data/repo/android-tools-for-linux/cpu/output/CMakeFiles/crypto-perf.dir
