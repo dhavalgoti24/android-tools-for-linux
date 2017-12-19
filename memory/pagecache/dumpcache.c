@@ -105,6 +105,15 @@ static int store_num_cached(const char* fpath, const struct stat *sb) {
 }
 
 static int scan_entry(const char *fpath, const struct stat *sb, int typeflag, struct FTW *ftwbuf) {
+    switch (sb->st_mode & S_IFMT) {
+    case S_IFBLK:  return 0;
+    case S_IFCHR:  return 0;
+    case S_IFIFO:  return 0;
+    case S_IFLNK:  return 0;
+    case S_IFSOCK: return 0;
+    default:       break;
+    }
+
     if (typeflag == FTW_F) {
         store_num_cached(fpath, sb);
     }
