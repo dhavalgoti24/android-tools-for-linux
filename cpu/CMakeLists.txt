@@ -4,5 +4,8 @@ add_definitions (
     -D_GNU_SOURCE
 )
 
-add_executable(crypto-perf  ${PROJECT_SOURCE_DIR}/crypto-perf/crypto.cpp)
-target_link_libraries(crypto-perf)
+#add_executable(crypto-perf  ${PROJECT_SOURCE_DIR}/crypto-perf/crypto.cpp)
+#target_link_libraries(crypto-perf)
+
+add_executable(cpustats  ${PROJECT_SOURCE_DIR}/cpustats/cpustats.c)
+target_link_libraries(cpustats)
