@@ -496,7 +496,7 @@ readmnt()
 	 * Stat() the directory.
 	 */
 	    if (statsafely(dn, &sb)) {
-		if (!Fwarn) {
+		if (0) { //not warn
 		    (void) fprintf(stderr, "%s: WARNING: can't stat() ", Pn);
 		    safestrprt(fp[2], stderr, 0);
 		    (void) fprintf(stderr, " file system ");
